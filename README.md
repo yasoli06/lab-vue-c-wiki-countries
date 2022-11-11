@@ -18,7 +18,9 @@ After spending too much time on GitHub, you found a [JSON dataset of countries](
 - Open the LAB and start:
 
   ```bash
-  npm install
+  $ cd lab-vue-c-wiki-countries
+  $ npm install
+  $ npm run dev
   ```
 
 
