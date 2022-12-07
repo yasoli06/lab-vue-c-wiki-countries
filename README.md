@@ -10,7 +10,6 @@ After spending too much time on GitHub, you found a [JSON dataset of countries](
   <img src="https://education-team-2020.s3.eu-west-1.amazonaws.com/web-dev/labs/lab-wiki-countries-1.gif" alt="Example - Finished LAB" />
 </p>
 
-
 ## Setup
 
 - Fork this repo
@@ -22,7 +21,6 @@ After spending too much time on GitHub, you found a [JSON dataset of countries](
   $ npm install
   $ npm run dev
   ```
-
 
 ## Submission
 
@@ -36,7 +34,6 @@ After spending too much time on GitHub, you found a [JSON dataset of countries](
 
 - Create a Pull Request so that your TAs can check your work.
 
-
 ## Getting Started
 
 Clean the `App.vue` component so that it has the following structure inside the template tags
@@ -44,8 +41,7 @@ Clean the `App.vue` component so that it has the following structure inside the 
 ```vue
 <!-- src/App.js -->
 <template>
-  <div class="app">
-  </div>
+  <div class="app"></div>
 </template>
 ```
 
@@ -60,41 +56,54 @@ Remember to install the vue Router:
 ```shell
 $ yarn install vue-router
 ```
-or 
+
+or
+
 ```bash
 npm install vue-router
 ```
 
-And set up the router in your `src/router.js` file:
+And set up the router in your `src/router/index.js` file:
 
 ```js
-// src/router.js
-import { createRouter, createWebHistory } from 'vue-router';
+// src/router/index.js
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: '/',
-    name: 'list',
-    component: () => import('../components/CountriesList.vue'),
+    path: "/",
+    name: "list",
+    component: () => import("../components/CountriesList.vue"),
     children: [
       {
-        path: '/list/:alpha3Code',
-        name: 'list',
-        component: () => import( '../components/CountryDetails.vue')
+        path: "/list/:alpha3Code",
+        name: "list",
+        component: () => import("../components/CountryDetails.vue"),
       },
-    ]
-  }
+    ],
+  },
 ];
 
 const router = createRouter({
-  history: createWebHistory('/'),
+  history: createWebHistory("/"),
   routes,
   scrollBehavior() {
-    document.getElementById('app').scrollIntoView();
-  }
+    document.getElementById("app").scrollIntoView();
+  },
 });
 
-export default router
+export default router;
+```
+
+Then use in the main.js file like so:
+
+```
+// src/main.js
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+
+createApp(App).use(router).mount("#app");
 ```
 
 ### Bootstrap installation
@@ -104,7 +113,9 @@ We will use [Bootstrap](https://getbootstrap.com/) for the design :+1:
 ```shell
 $ yarn install bootstrap
 ```
+
 or
+
 ```bash
 npm install bootstrap@v5.2.2
 ```
@@ -114,7 +125,7 @@ To make the Bootstrap styles available in the entire app, import the stylesheet 
 ```javascript
 // src/main.js
 
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 ```
 
 ## Instructions
@@ -137,7 +148,7 @@ If you want to style it, refresh your memory on Bootstrap in the [docs](https://
 
 ### Iteration 1.2 | Navbar component
 
-The simplest way to define a component in vue is to write a JavaScript function aka function component. The navbar should be displaying the title *LAB - WikiCountries*.
+The simplest way to define a component in vue is to write a JavaScript function aka function component. The navbar should be displaying the title _LAB - WikiCountries_.
 
 ### Iteration 1.3 | CountriesList component
 
@@ -162,38 +173,40 @@ Components rendered with Vue.js can read the query with `this.$route`. We can us
 - Brazil: https://flagpedia.net/data/flags/icon/72x54/br.png
 - etc.
 
-----
+---
 
 ### Iteration 2 | Linking it all together
 
-Once done creating the components, the structure of elements that your `App.js` will render should look somewhat like this:
+Once done creating the components, the structure of elements that your `App.vue` will render should look somewhat like this:
 
 ```vue
-<div class="app">
-  <Navbar />
-
-  <div className="container">
-    <div className="row">
-      <CountriesList :countries="countries" />
-      <router-view>
-    </div>
+<template>
+  <div class="app">
+    <NavBar />
+    <router-view />
   </div>
-</div>
+</template>
+
+<script setup>
+import NavBar from "./components/NavBar.vue";
+</script>
+
+<style></style>
 ```
 
-----
+---
 
 ### Iteration 3 | Set the state when the component mounts
 
 Our `App.vue` application should pull `countries` into the vue data method, holding the data coming from the `src/countries.json` file.
 
-----
+---
 
 ### Iteration 4 | Bonus | Fetch countries' data from an API
 
 Instead of relying on the static data coming from a `json` file, let's do something more interesting and get out the data from an actual API.
 
-Let's make a `GET` request to the URL [https://ih-countries-api.herokuapp.com/countries](https://ih-countries-api.herokuapp.com/countries) and use the data returned from the response as the list of the countries. You can use either `fetch` or `axios` to make the request. 
+Let's make a `GET` request to the URL [https://ih-countries-api.herokuapp.com/countries](https://ih-countries-api.herokuapp.com/countries) and use the data returned from the response as the list of the countries. You can use either `fetch` or `axios` to make the request.
 
 If you are using Options API, you should use the `mounted()` Hook to set the lifecycle hook that runs only once and makes a request to the API.
 
@@ -209,7 +222,7 @@ You should use `<script setup>` to set de composition API lifecycle method which
 
 The request should happen first thing when the application loads, therefore think about when and from where we should make the request to the API.
 
-----
+---
 
 ### Iteration 5 | Bonus | Fetch one country data from an API
 
