@@ -120,7 +120,7 @@ or
 npm install bootstrap@v5.2.2
 ```
 
-To make the Bootstrap styles available in the entire app, import the stylesheet in `index.js`:
+To make the Bootstrap styles available in the entire app, import the stylesheet in `main.js` before the `createApp` line:
 
 ```javascript
 // src/main.js
