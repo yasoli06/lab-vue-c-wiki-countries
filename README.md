@@ -128,8 +128,6 @@ To make the Bootstrap styles available in the entire app, import the stylesheet 
 import "bootstrap/dist/css/bootstrap.css";
 ```
 
-## Instructions
-
 ### Iteration 1.1 | Create components
 
 In this iteration, we will focus on the general layout. Before you start, inside the `src` folder, create the `components` folder. There you will create at least 3 components:
